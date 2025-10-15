@@ -78,7 +78,7 @@
             }
 
             @page {
-                size: 9.5in 5.5in;
+                /* size: 9.5in 5.5in; */
                 margin: 0in;
             }
 
