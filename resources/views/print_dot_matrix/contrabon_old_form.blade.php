@@ -46,11 +46,11 @@
         }
 
         table.main td, table.main th {
-            border: 1px solid #000;
+            /* border: 1px solid #000; */
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
-            /* border: none */
+            border: none
 
         }
 
