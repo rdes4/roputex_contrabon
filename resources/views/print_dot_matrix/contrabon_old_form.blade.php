@@ -46,11 +46,11 @@
         }
 
         table.main td, table.main th {
-            /* border: 1px solid #000; */
+            border: 1px solid #000;
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
-            border: none
+            /* border: none */
 
         }
 
@@ -171,7 +171,7 @@
             <td colspan="43" height="" style="height: 0.5in"></td>
         </tr>
         <tr>
-            <td colspan="14"></td>
+            <td colspan="13"></td>
             <td colspan="10">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
             <td colspan="13" rowspan="2">
                 <br>
@@ -181,7 +181,7 @@
         </tr>
         <tr>
             <td colspan="8"></td>
-            <td colspan="16">Sls : {{$contrabon->nama_sales}}</td>
+            <td colspan="15">Sls : {{$contrabon->nama_sales}}</td>
         </tr>
         {{-- <tr>
             <td colspan="24"></td>
