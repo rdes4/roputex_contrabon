@@ -1,0 +1,289 @@
+.badge-bg-b2b{
+    background-color: #0033a2;
+}
+
+.badge-bg-siplah{
+    background-color: #4accff;
+}
+
+.badge-bg-tender{
+    background-color: #2f7f3f;
+}
+
+.badge-bg-retail{
+    background-color: #829227;
+}
+
+.badge-bg-pl{
+    background-color: #006a56;
+}
+
+.badge-bg-bela{
+    background-color: #be005f;
+}
+
+.badge-bg-padi{
+    background-color: #983000;
+}
+
+.badge-bg-inaproc{
+    background-color: #c7014d;
+}
+
+.selectize-input{
+    border: none !important;
+}
+
+.selectize-dropdown{
+    border: none !important;
+}
+/* .word-wrap {
+    white-space: normal !important;
+    overflow-wrap: break-word !important;
+    word-break: break-all !important;
+} */
+.tagify {
+    width: 100% !important;
+}
+
+.tagify__input {
+    min-width: 100% !important;
+    flex: 1;
+}
+
+/* Agar mirip Bootstrap dropdown */
+.tagify__dropdown {
+    border-radius: 0.25rem;
+    border-color: #ced4da;
+    box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.1);
+}
+
+.dataTables_wrapper .dataTables_filter input[type="search"]{
+    border: 1px dashed rgba(106, 113, 133, 0.3) !important;
+}
+
+.dataTables_wrapper .dataTables_length select{
+    border: 1px dashed rgba(106, 113, 133, 0.3) !important;
+}
+
+.pointer{
+    cursor: pointer;
+}
+
+.m_datatable tbody tr {
+    cursor: pointer;
+}
+
+.spinner {
+    width: 30px;
+    height: 30px;
+    border: 4px solid #f3f3f3; /* warna background */
+    border-top: 4px solid #3498db; /* warna bagian berputar */
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+/* Animasi putar */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+.timeline {
+    position: relative;
+    list-style: none;
+    padding-left: 2rem;
+    margin: 0;
+}
+.timeline::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    left: 20px;
+    width: 4px;
+    background-color: var(--bs-primary);
+}
+.timeline-item {
+    position: relative;
+    margin-bottom: 2rem;
+}
+.timeline-item::before {
+    content: '';
+    position: absolute;
+    left: 12px;
+    background-color: var(--bs-primary);
+    border-radius: 50%;
+    width: 16px;
+    height: 16px;
+    top: 0;
+}
+.timeline-item h5 {
+    margin-top: 0;
+}
+
+.btn-icon{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+}
+
+.btn-icon-only{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+/* Style area Dropzone */
+.dropzone {
+    border: 1px dashed #6c757d !important;
+    border-radius: 10px;
+    background: #f8f9fa;
+    padding: 20px;
+    text-align: center;
+    transition: background-color 0.2s ease-in-out, border-color 0.2s ease-in-out;
+}
+
+.dropzone:hover {
+    background-color: #e9ecef;
+    border-color: #007bff;
+}
+
+/* Warna saat drag masuk */
+.dropzone.dz-drag-hover {
+    background-color: #d0ebff;
+    border-color: #0d6efd;
+}
+
+/* Style teks */
+.dropzone .dz-message {
+    font-size: 16px;
+    color: #6c757d;
+}
+
+/* Tombol hapus bawaan Dropzone */
+.dropzone .dz-remove {
+    display: inline-block;
+    margin-top: 10px;
+    font-size: 14px;
+    text-decoration: none;
+    color: #dc3545;
+    font-weight: bold;
+    cursor: pointer !important;
+    pointer-events: all !important;
+}
+
+.dropzone .dz-remove:hover {
+    text-decoration: underline;
+}
+
+/* Thumbnail */
+.dropzone .dz-preview {
+    position: relative;
+    display: inline-block;
+    margin: 10px;
+}
+
+/* Overlay tombol hapus di pojok thumbnail */
+.dropzone .dz-preview .dz-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    color: white;
+    border-radius: 50%;
+    width: 24px;
+    height: 24px;
+    text-align: center;
+    line-height: 24px;
+    font-size: 14px;
+    z-index: 9999;
+    cursor: pointer;
+}
+
+/* Pastikan toast-container selalu di atas modal */
+.toast-container {
+    z-index: 9999 !important; /* Lebih tinggi dari modal (1055) & backdrop (1050) */
+}
+
+/* Opsional: transisi lebih halus */
+.toast {
+    transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+td{
+    vertical-align: top !important;
+}
+
+th{
+    vertical-align: middle !important;
+}
+
+input[readonly] {
+  background-color: #e8e7e7; /* abu-abu muda */
+  color: #555;              /* teks lebih redup */
+}
+
+input[readonly]:focus {
+  background-color: #e8e7e7; /* abu-abu muda */
+  color: #555;    
+}
+
+.flatpickr-input{
+    background-color: white !important;
+    color: rgb(30, 26, 26) !important; 
+}
+
+/* APPROVED STAMP */
+:root{ --c:#1f9d55; }
+
+.circle{
+    width:120px;   /* lebih kecil */
+    height:120px;  /* diameter */
+    border:4px solid var(--c);
+    border-radius:50%;
+    color:var(--c);
+    display:grid;
+    place-items:center;
+    transform:rotate(-8deg);
+    position:relative;
+    filter: drop-shadow(0 4px 6px rgba(0,0,0,.12));
+  }
+  .circle::before{
+    content:"";
+    position:absolute; inset:8px;
+    border:2px dashed color-mix(in srgb, var(--c) 85%, transparent);
+    border-radius:50%;
+  }
+  .circle b{
+    text-transform:uppercase;
+    letter-spacing:.2em;
+    font-weight:800;
+    font-size:14px;
+  }
+
+
+@media (prefers-color-scheme: dark){ body{background:#0b1020;} }
+
+.nav-tabs{
+    --bs-nav-tabs-border-width: 0;
+}
+
+.status.success {
+    background-color: #d4edda;
+    color: #155724;
+}
+
+.status.duplicate {
+    background-color: #f8d7da;
+    color: #721c24;
+}
+
+.align-middle{
+    vertical-align: center !important;
+}
+
+.grid-16 {
+  display: grid;
+  grid-template-columns: repeat(16, 1fr);
+  gap: 8px; /* jarak antar kolom */
+}
