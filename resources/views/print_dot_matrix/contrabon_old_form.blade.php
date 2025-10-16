@@ -101,7 +101,7 @@
     <table class="main" style="width:100%">
 
         <tr>
-            <td colspan="43" height="" style="height: 1.2in"></td>
+            <td colspan="43" height="" style="height: 1in"></td>
         </tr>
         <tr>
             <td colspan="43" height="15px"></td>
@@ -133,7 +133,7 @@
             $retur_or_disc = $value->jumlah_diskon != NULL ? $value->jumlah_diskon : $value->jumlah_retur;
         @endphp
         <tr>
-            <td colspan="2"  height="15px"></td>
+            <td colspan="1"  height="15px"></td>
             <td colspan="5" style="padding-left: 6px;">{{$value->nomor_faktur}}</td>
             <td colspan="5">{{ \Carbon\Carbon::parse($value->tgl_faktur)->format('d-m-Y') }}</td>
             <td colspan="4">{{$value->sales_order}}</td>
@@ -163,7 +163,7 @@
         @endfor
 
         <tr>
-            <td colspan="27" style="font-weight: bold; text-align:right"></td>
+            <td colspan="26" style="font-weight: bold; text-align:right"></td>
             <td colspan="5" style="font-weight: bold; text-align:right; padding-top:10px">{{number_format($total_faktur)}}</td>
         </tr>
 
@@ -171,7 +171,7 @@
             <td colspan="43" height="" style="height: 0.8in"></td>
         </tr>
         <tr>
-            <td colspan="13"></td>
+            <td colspan="12"></td>
             <td colspan="10">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
             <td colspan="13" rowspan="2">
                 <br>
@@ -180,7 +180,7 @@
             </td>
         </tr>
         <tr>
-            <td colspan="8"></td>
+            <td colspan="7"></td>
             <td colspan="15">Sls : {{$contrabon->nama_sales}}</td>
         </tr>
         {{-- <tr>
