@@ -55,6 +55,7 @@ Route::middleware(['akses'])->group(function () {
         Route::post('edit', [ContrabonController::class, 'edit']);
         Route::post('update', [ContrabonController::class, 'update']);
         Route::post('delete', [ContrabonController::class, 'delete']);
+        Route::post('delete-contrabon-faktur', [ContrabonController::class, 'delete_contrabon_faktur']);
         Route::post('print-selection', [ContrabonController::class, 'print_selection']);
         Route::get('print', [ContrabonController::class, 'print']);
     });

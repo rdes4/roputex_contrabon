@@ -212,6 +212,25 @@ class ContrabonController extends Controller
         }
     }
 
+    public function delete_contrabon_faktur(Request $request){
+        // dd($request);
+        try {
+            //code...
+            $qry2 = ContrabonFakturModel::where('id', $request->id_contrabon_faktur)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "Faktur berhasil dirubah",
+            ]);
+        } catch (\Exception $e) {
+            // Tangkap semua jenis error umum
+            return response()->json([
+                'success' => false,
+                'message' => $e->getMessage()
+            ], 500);
+        }
+    }
+
     public function print_selection(Request $request){
         $id_contrabon = $request->id_contrabon;
         return view('pages.contrabon.print_selection',[

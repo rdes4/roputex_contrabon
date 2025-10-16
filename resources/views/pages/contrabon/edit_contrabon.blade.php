@@ -69,7 +69,7 @@
                         <tr class="old_faktur">
                             <td>
                                 <input type="hidden" class="id_contrabon_faktur" value="{{$value->id}}" name="" id="">
-                                <i class="icon-trash pointer txt-danger" onclick="deleteContrabonRetur(this)"></i>
+                                <i class="icon-trash pointer txt-danger" onclick="deleteContrabonFaktur(this)"></i>
                             </td>
                             <td>
                                 <input type="text" class="form-control nomor_faktur" value="{{$value->nomor_faktur}}">
@@ -278,5 +278,28 @@
         var total_faktur = jumlah_faktur - (jumlah_diskon/100*jumlah_faktur) - jumlah_retur
         var text_total_faktur = total_faktur.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         tr.find('.total_faktur').text(text_total_faktur.replace(/\./g, '#').replace(/,/g, '.').replace(/#/g, ','))
+    }
+
+    function deleteContrabonFaktur(ele) {
+        Swal.fire({
+            title: 'Yakin ingin menghapus?',
+            text: 'Data yang sudah dihapus tidak bisa dikembalikan!',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonText: 'Ya, hapus!',
+            cancelButtonText: 'Batal'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                $.post(main_url + '/contrabon/delete-contrabon-faktur',
+                {
+                    _token: token,
+                    id_contrabon_faktur: $(ele).closest('tr').find('.id_contrabon_faktur').val()
+                },
+                function(data, status){
+                    toast.show()
+                    $(ele).closest('tr').remove()
+                })
+            }
+        });
     }
 </script>
