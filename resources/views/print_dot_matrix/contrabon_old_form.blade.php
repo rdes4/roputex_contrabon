@@ -137,9 +137,9 @@
             <td colspan="5" style="padding-left: 4px;">{{$value->nomor_faktur}}</td>
             <td colspan="5">{{ \Carbon\Carbon::parse($value->tgl_faktur)->format('d-m-Y') }}</td>
             <td colspan="4">{{$value->sales_order}}</td>
-            <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur)}}</td>
-            <td colspan="6" style="text-align: right; padding-right: 9px">{{number_format($retur_or_disc)}}</td>
-            <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur-$pengurang)}}</td>
+            <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur, 2, ',', '.')}}</td>
+            <td colspan="6" style="text-align: right; padding-right: 9px">{{number_format($retur_or_disc, 2, ',', '.')}}</td>
+            <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur-$pengurang, 2, ',', '.')}}</td>
         </tr>
         @php
             $total_faktur += $value->jumlah_faktur-$pengurang;
