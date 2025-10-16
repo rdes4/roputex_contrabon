@@ -56,9 +56,13 @@ class CustomerController extends Controller
     public function save(Request $request){
         // dd($request);
         try {
-            $get_last_customer = CustomerModel::orderBy('id', 'desc')->first();
+            $name = trim($request->nama); // hapus spasi di awal/akhir
+            $words = explode(' ', $name);
+            $inisial = strtoupper(substr($words[0], 0, 1));
+
+            $get_last_customer = CustomerModel::where('customer_code', 'like', '%CUS'.$inisial.'%')->orderBy('id', 'desc')->first();
             if ($get_last_customer == NULL) {
-                $customer_code = 'C0001';
+                $customer_code = 'CUS'.$inisial.'001';
             } else {
                 $customer_code = $get_last_customer->customer_code;
                 $customer_code++;
