@@ -50,7 +50,7 @@
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
-            border: none
+            /* border: none */
 
         }
 
@@ -164,7 +164,7 @@
 
         <tr>
             <td colspan="26" style="font-weight: bold; text-align:right"></td>
-            <td colspan="5" style="font-weight: bold; text-align:right; padding-top:9px">{{number_format($total_faktur)}}</td>
+            <td colspan="5" style="font-weight: bold; text-align:right; padding-top:5px">{{number_format($total_faktur)}}</td>
         </tr>
 
         <tr>

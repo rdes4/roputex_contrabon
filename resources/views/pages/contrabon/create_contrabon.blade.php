@@ -53,17 +53,19 @@
             <table class="table table-bordered table_faktur">
                 <thead class="table-dark">
                     <tr>
-                        <th width="5%">#</th>
+                        <th width="4%">#</th>
+                        <th width="4%">No</th>
                         <th>No. Faktur</th>
-                        <th width="17%">Tgl. Faktur</th>
+                        <th width="13%">Tgl. Faktur</th>
                         <th width="13%">SO</th>
-                        <th width="15%">Jumlah</th>
-                        <th width="15%">Diskon/Retur</th>
-                        <th width="15%">Total</th>
+                        <th width="19%">Jumlah</th>
+                        <th width="19%">Diskon/Retur</th>
+                        <th width="13%">Total</th>
                     </tr>
                 </thead>
                 <tbody>
                     <tr>
+                        <td></td>
                         <td></td>
                         <td>
                             <input type="text" class="form-control nomor_faktur">
@@ -110,7 +112,7 @@
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
         decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-        currencySymbol: 'Rp ',
+        currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
     });
@@ -118,7 +120,7 @@
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
         decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-        currencySymbol: 'Rp ',
+        currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
     });
@@ -130,64 +132,96 @@
         placeholder: 'Silahkan pilih...'
     });
 
+    function updateNumbering() {
+        $('.table_faktur tbody tr').each(function(index) {
+            // kolom kedua (index 1)
+            $(this).find('td:eq(1)').text(index + 1);
+        });
+    }
+
+    // panggil pertama kali
+    updateNumbering();
+
     function reloadContrabonTable(params) {
         $('.datatable_contrabond').DataTable().ajax.reload();
     }
 
     function addListFaktur(params) {
-        $('.table_faktur tbody').append(`
-            <tr>
-                <td>
-                    <i class="icon-close pointer txt-danger" onclick="removeListFaktur(this)"></i>
-                </td>
-                <td>
-                    <input type="text" class="form-control nomor_faktur">
-                </td>
-                <td>
-                    <input type="text" class="form-control tgl_faktur date_${new_faktur}" placeholder="dd-mm-yyyy">
-                </td>
-                <td>
-                    <input type="text" class="form-control sales_order">
-                </td>
-                <td>
-                    <input type="text" step="any" class="form-control jumlah_faktur jumlah_faktur_${new_faktur}" onchange="countTotalFaktur(this)">
-                </td>
-                <td>
-                    <input type="text" step="any" class="form-control jumlah_retur jumlah_retur_${new_faktur}" onchange="countTotalFaktur(this)">
-                </td>
-                <td class="total_faktur text-end">
+        let jumlah = $('.table_faktur tbody tr').length;
+        console.log(jumlah);
 
-                </td>
-            </tr>
-        `)
+        if (jumlah < 17) {
+             $('.table_faktur tbody').append(`
+                <tr>
+                    <td>
+                        <i class="icon-close pointer txt-danger" onclick="removeListFaktur(this)"></i>
+                    </td>
+                    <td>
 
-        flatpickr(`.date_${new_faktur}`, {
-            dateFormat: "d-m-Y",
-        });
+                    </td>
+                    <td>
+                        <input type="text" class="form-control nomor_faktur">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control tgl_faktur date_${new_faktur}" placeholder="dd-mm-yyyy">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control sales_order">
+                    </td>
+                    <td>
+                        <input type="text" step="any" class="form-control jumlah_faktur jumlah_faktur_${new_faktur}" onchange="countTotalFaktur(this)">
+                    </td>
+                    <td>
+                        <input type="text" step="any" class="form-control jumlah_retur jumlah_retur_${new_faktur}" onchange="countTotalFaktur(this)">
+                    </td>
+                    <td class="total_faktur text-end">
 
-        new AutoNumeric(`.jumlah_faktur_${new_faktur}`, {
-            digitGroupSeparator: '.',     // pisah ribuan pakai titik
-            decimalCharacter: ',',        // desimal pakai koma
-            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-            currencySymbol: 'Rp ',
-            currencySymbolPlacement: 'p', // prefix "Rp "
-            unformatOnSubmit: true        // kirim nilai tanpa format
-        });
+                    </td>
+                </tr>
+            `)
 
-        new AutoNumeric(`.jumlah_retur_${new_faktur}`, {
-            digitGroupSeparator: '.',     // pisah ribuan pakai titik
-            decimalCharacter: ',',        // desimal pakai koma
-            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-            currencySymbol: 'Rp ',
-            currencySymbolPlacement: 'p', // prefix "Rp "
-            unformatOnSubmit: true        // kirim nilai tanpa format
-        });
+            flatpickr(`.date_${new_faktur}`, {
+                dateFormat: "d-m-Y",
+            });
 
-        new_faktur++
+            new AutoNumeric(`.jumlah_faktur_${new_faktur}`, {
+                digitGroupSeparator: '.',     // pisah ribuan pakai titik
+                decimalCharacter: ',',        // desimal pakai koma
+                decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+                currencySymbol: 'Rp. ',
+                currencySymbolPlacement: 'p', // prefix "Rp "
+                unformatOnSubmit: true        // kirim nilai tanpa format
+            });
+
+            new AutoNumeric(`.jumlah_retur_${new_faktur}`, {
+                digitGroupSeparator: '.',     // pisah ribuan pakai titik
+                decimalCharacter: ',',        // desimal pakai koma
+                decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+                currencySymbol: 'Rp. ',
+                currencySymbolPlacement: 'p', // prefix "Rp "
+                unformatOnSubmit: true        // kirim nilai tanpa format
+            });
+
+            new_faktur++
+
+            updateNumbering();
+        } else {
+            Swal.fire({
+                icon: 'warning',
+                title: 'Batas Faktur Terpenuhi',
+                html: `Jumlah faktur sudah mencapai <b>${jumlah}</b> (batas: 17).<br>
+                        Silakan buat <b>kontrabon baru</b> untuk menambahkan faktur lagi.`,
+                showCancelButton: true,
+                cancelButtonText: 'Batal'
+            })
+        }
+
+
     }
 
     function removeListFaktur(ele) {
         $(ele).closest('tr').remove()
+        updateNumbering();
     }
 
     function saveContrabon(ele) {

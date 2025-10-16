@@ -23,7 +23,7 @@
                     <input type="text" name="" class="form-control tgl_jatuh_tempo" id="" placeholder="dd-mm-yyyy" readonly value="{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->format('d-m-Y') }}">
                 </div>
                 <div class="col-4 d-flex align-items-center">
-                    <span class="badge badge-dark pointer" onclick="countTanggalJatuhTempo(this)"><i class="icon-shift-right"></i> Hitung Tempo</span>
+                    <span class="badge badge-dark pointer" onclick="countTanggalJatuhTempoEdit(this)"><i class="icon-shift-right"></i> Hitung Tempo</span>
                 </div>
             </div>
         </div>
@@ -47,21 +47,22 @@
     <hr>
 
     <div>
-        <span class="badge badge-dark pointer" onclick="addListFaktur()"><i class="icon-plus"></i> Tambah Faktur</span>
+        <span class="badge badge-dark pointer" onclick="addListFakturEdit()"><i class="icon-plus"></i> Tambah Faktur</span>
     </div>
 
     <div class="row mt-2">
         <div class="col-12">
-            <table class="table table-bordered table_faktur">
+            <table class="table table-bordered table_faktur_edit">
                 <thead class="table-dark">
                     <tr>
                         <th width="3%">#</th>
+                        <th width="3%">No</th>
                         <th>No. Faktur</th>
                         <th width="17%">Tgl. Faktur</th>
                         <th width="13%">SO</th>
-                        <th width="15%">Jumlah</th>
-                        <th width="15%">Diskon/Retur</th>
-                        <th width="15%">Total</th>
+                        <th width="17%">Jumlah</th>
+                        <th width="17%">Diskon/Retur</th>
+                        <th width="13%">Total</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -71,6 +72,7 @@
                                 <input type="hidden" class="id_contrabon_faktur" value="{{$value->id}}" name="" id="">
                                 <i class="icon-trash pointer txt-danger" onclick="deleteContrabonFaktur(this)"></i>
                             </td>
+                            <td></td>
                             <td>
                                 <input type="text" class="form-control nomor_faktur" value="{{$value->nomor_faktur}}">
                             </td>
@@ -81,10 +83,10 @@
                                 <input type="text" class="form-control sales_order" value="{{$value->sales_order}}">
                             </td>
                             <td>
-                                <input type="text" step="any" class="form-control jumlah_faktur" value="{{$value->jumlah_faktur}}" onchange="countTotalFaktur(this)">
+                                <input type="text" step="any" class="form-control jumlah_faktur" value="{{$value->jumlah_faktur}}" onchange="countTotalFakturEdit(this)">
                             </td>
                             <td>
-                                <input type="text" step="any" class="form-control jumlah_retur" value="{{$value->jumlah_retur}}" onchange="countTotalFaktur(this)">
+                                <input type="text" step="any" class="form-control jumlah_retur" value="{{$value->jumlah_retur}}" onchange="countTotalFakturEdit(this)">
                             </td>
                             <td class="total_faktur text-end">
                                 {{number_format($value->jumlah_faktur - ($value->jumlah_diskon/100*$value->jumlah_faktur) - $value->jumlah_retur, 2 )}}
@@ -112,7 +114,7 @@
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
         decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-        currencySymbol: 'Rp ',
+        currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
     });
@@ -120,12 +122,12 @@
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
         decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-        currencySymbol: 'Rp ',
+        currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
     });
 
-    var new_faktur = 0
+    var new_faktur_edit = 0
     flatpickr(".date", {
         dateFormat: "d-m-Y",
     });
@@ -137,64 +139,96 @@
         placeholder: 'Silahkan pilih...'
     });
 
-    function addListFaktur(params) {
-        $('.table_faktur tbody').append(`
-            <tr class="new_faktur">
-                <td>
-                    <i class="icon-close pointer txt-danger" onclick="removeListFaktur(this)"></i>
-                </td>
-                <td>
-                    <input type="text" class="form-control nomor_faktur">
-                </td>
-                <td>
-                    <input type="text" class="form-control tgl_faktur date_${new_faktur}" placeholder="dd-mm-yyyy">
-                </td>
-                <td>
-                    <input type="text" class="form-control sales_order">
-                </td>
-                <td>
-                    <input type="text" step="any" class="form-control jumlah_faktur jumlah_faktur_${new_faktur}" onchange="countTotalFaktur(this)">
-                </td>
-                <td>
-                    <input type="text" step="any" class="form-control jumlah_retur jumlah_retur_${new_faktur}" onchange="countTotalFaktur(this)">
-                </td>
-                <td class="total_faktur text-end">
-
-                </td>
-            </tr>
-        `)
-
-        flatpickr(`.date_${new_faktur}`, {
-            dateFormat: "d-m-Y",
-        });
-
-        new AutoNumeric(`.jumlah_faktur_${new_faktur}`, {
-            digitGroupSeparator: '.',     // pisah ribuan pakai titik
-            decimalCharacter: ',',        // desimal pakai koma
-            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-            currencySymbol: 'Rp ',
-            currencySymbolPlacement: 'p', // prefix "Rp "
-            unformatOnSubmit: true        // kirim nilai tanpa format
-        });
-
-        new AutoNumeric(`.jumlah_retur_${new_faktur}`, {
-            digitGroupSeparator: '.',     // pisah ribuan pakai titik
-            decimalCharacter: ',',        // desimal pakai koma
-            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
-            currencySymbol: 'Rp ',
-            currencySymbolPlacement: 'p', // prefix "Rp "
-            unformatOnSubmit: true        // kirim nilai tanpa format
+    function updateNumberingEdit() {
+        $('.table_faktur_edit tbody tr').each(function(index) {
+            // kolom kedua (index 1)
+            $(this).find('td:eq(1)').text(index + 1);
         });
     }
 
-    function removeListFaktur(ele) {
+    // panggil pertama kali
+    updateNumberingEdit();
+
+    function addListFakturEdit(params) {
+        let jumlah = $('.table_faktur_edit tbody tr').length;
+        console.log(jumlah);
+
+        if (jumlah < 17) {
+            $('.table_faktur_edit tbody').append(`
+                <tr class="new_faktur_edit">
+                    <td>
+                        <i class="icon-close pointer txt-danger" onclick="removeListFakturEdit(this)"></i>
+                    </td>
+                    <td>
+
+                    </td>
+                    <td>
+                        <input type="text" class="form-control nomor_faktur">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control tgl_faktur date_${new_faktur_edit}" placeholder="dd-mm-yyyy">
+                    </td>
+                    <td>
+                        <input type="text" class="form-control sales_order">
+                    </td>
+                    <td>
+                        <input type="text" step="any" class="form-control jumlah_faktur jumlah_faktur_${new_faktur_edit}" onchange="countTotalFakturEdit(this)">
+                    </td>
+                    <td>
+                        <input type="text" step="any" class="form-control jumlah_retur jumlah_retur_${new_faktur_edit}" onchange="countTotalFakturEdit(this)">
+                    </td>
+                    <td class="total_faktur text-end">
+
+                    </td>
+                </tr>
+            `)
+
+            flatpickr(`.date_${new_faktur_edit}`, {
+                dateFormat: "d-m-Y",
+            });
+
+            new AutoNumeric(`.jumlah_faktur_${new_faktur_edit}`, {
+                digitGroupSeparator: '.',     // pisah ribuan pakai titik
+                decimalCharacter: ',',        // desimal pakai koma
+                decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+                currencySymbol: 'Rp ',
+                currencySymbolPlacement: 'p', // prefix "Rp "
+                unformatOnSubmit: true        // kirim nilai tanpa format
+            });
+
+            new AutoNumeric(`.jumlah_retur_${new_faktur_edit}`, {
+                digitGroupSeparator: '.',     // pisah ribuan pakai titik
+                decimalCharacter: ',',        // desimal pakai koma
+                decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+                currencySymbol: 'Rp ',
+                currencySymbolPlacement: 'p', // prefix "Rp "
+                unformatOnSubmit: true        // kirim nilai tanpa format
+            });
+
+            updateNumberingEdit();
+        }else{
+            Swal.fire({
+                icon: 'warning',
+                title: 'Batas Faktur Terpenuhi',
+                html: `Jumlah faktur sudah mencapai <b>${jumlah}</b> (batas: 17).<br>
+                        Silakan buat <b>kontrabon baru</b> untuk menambahkan faktur lagi.`,
+                showCancelButton: true,
+                cancelButtonText: 'Batal'
+            })
+        }
+
+
+    }
+
+    function removeListFakturEdit(ele) {
         $(ele).closest('tr').remove()
+        updateNumberingEdit();
     }
 
     function updateContrabon(ele) {
         var formData = $(ele).closest('.form_data')
         var arr_faktur = []
-        var arr_new_faktur = []
+        var arr_new_faktur_edit = []
 
         var id_contrabon = formData.find('.id_contrabon').val()
         var nomor = formData.find('.nomor').val()
@@ -218,7 +252,7 @@
             return;
         }
 
-        var table = formData.find('.table_faktur')
+        var table = formData.find('.table_faktur_edit')
         table.find('tbody tr.old_faktur').each(function(index) {
             let row = $(this);
             let id_contrabon_faktur = row.find('.id_contrabon_faktur').val();
@@ -255,7 +289,7 @@
             })
         });
 
-        table.find('tbody tr.new_faktur').each(function(index) {
+        table.find('tbody tr.new_faktur_edit').each(function(index) {
             let row = $(this);
 
             let nomor_faktur = row.find('.nomor_faktur').val();
@@ -281,7 +315,7 @@
                 var jumlah_retur = 0
             }
 
-            arr_new_faktur.push({
+            arr_new_faktur_edit.push({
                 nomor_faktur,
                 tgl_faktur,
                 sales_order,
@@ -302,7 +336,7 @@
             id_sales,
             id_bank,
             arr_faktur,
-            arr_new_faktur,
+            arr_new_faktur_edit,
         },
         function(data, status){
             if (data.success) {
@@ -312,9 +346,9 @@
         })
     }
 
-    function countTanggalJatuhTempo(ele) {
+    function countTanggalJatuhTempoEdit(ele) {
         var formData = $(ele).closest('.form_data')
-        var tr = formData.find('.table_faktur tbody tr:first')
+        var tr = formData.find('.table_faktur_edit tbody tr:first')
 
         let tempo = parseInt(formData.find('.tempo').val());
         let date = tr.find('.tgl_faktur').val();
@@ -338,7 +372,7 @@
         formData.find('.tgl_jatuh_tempo').val(formatted)
     }
 
-    function countTotalFaktur(ele) {
+    function countTotalFakturEdit(ele) {
         var tr = $(ele).closest('tr')
         let check_faktur = tr.find('.jumlah_faktur').val() || 0;
         let check_retur = tr.find('.jumlah_retur').val() || 0;
@@ -382,6 +416,7 @@
                 function(data, status){
                     toast.show()
                     $(ele).closest('tr').remove()
+                    updateNumberingEdit();
                 })
             }
         });
