@@ -36,13 +36,14 @@
     <!-- Theme js-->
     <script src="{{asset('mofi/assets/js/script.js')}}"></script>
     <script src="{{asset('mofi/assets/js/script1.js')}}"></script>
-    
+
     {{-- CDN --}}
     <script src="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.15.2/js/selectize.min.js" integrity="sha512-IOebNkvA/HZjMM7MxL0NYeLYEalloZ8ckak+NDtOViP7oiYzG5vn6WVXyrJDiJPhl4yRdmNAG49iuLmhkUdVsQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script src="https://cdn.jsdelivr.net/npm/quill@2.0.3/dist/quill.js"></script>
     <script src="https://unpkg.com/dropzone@5/dist/min/dropzone.min.js"></script>
     <script src="https://code.jquery.com/ui/1.14.1/jquery-ui.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/autonumeric/4.10.9/autoNumeric.min.js" integrity="sha512-cVa6IRDb7tSr/KZqJkq/FgnWMwBaRfi49qe3CVW4DhYMU30vHAXsIgbWu17w/OuVa0jyGly6/kJvcIzr8vFrDQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
 
 
     <!-- Plugin used-->
@@ -92,6 +93,6 @@
             if (data.success) {
                 window.open(data.url, '_blank', 'noopener,noreferrer');  // _blank = new tab
             }
-        }) 
+        })
     }
 </script>

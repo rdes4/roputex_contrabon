@@ -75,10 +75,10 @@
                             <input type="text" class="form-control sales_order">
                         </td>
                         <td>
-                            <input type="number" step="any" class="form-control jumlah_faktur" onchange="countTotalFaktur(this)">
+                            <input type="text" step="any" class="form-control jumlah_faktur" onchange="countTotalFaktur(this)">
                         </td>
                         <td>
-                            <input type="number" step="any" class="form-control jumlah_retur" onchange="countTotalFaktur(this)">
+                            <input type="text" step="any" class="form-control jumlah_retur" onchange="countTotalFaktur(this)">
                         </td>
                         <td class="total_faktur text-end">
 
@@ -99,9 +99,30 @@
 <script>
     var new_faktur = 0;
 
+    var toastEl = document.getElementById('toast-success');
+    var toast = new bootstrap.Toast(toastEl); // delay = 3 detik
+
     flatpickr(".date", {
         dateFormat: "d-m-Y",
     });
+
+    new AutoNumeric(`.jumlah_faktur`, {
+        digitGroupSeparator: '.',     // pisah ribuan pakai titik
+        decimalCharacter: ',',        // desimal pakai koma
+        decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+        currencySymbol: 'Rp ',
+        currencySymbolPlacement: 'p', // prefix "Rp "
+        unformatOnSubmit: true        // kirim nilai tanpa format
+    });
+    new AutoNumeric(`.jumlah_retur`, {
+        digitGroupSeparator: '.',     // pisah ribuan pakai titik
+        decimalCharacter: ',',        // desimal pakai koma
+        decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+        currencySymbol: 'Rp ',
+        currencySymbolPlacement: 'p', // prefix "Rp "
+        unformatOnSubmit: true        // kirim nilai tanpa format
+    });
+
     $('.option').selectize({
         theme: 'bootstrap5',
         maxItems: 1,
@@ -129,10 +150,10 @@
                     <input type="text" class="form-control sales_order">
                 </td>
                 <td>
-                    <input type="number" step="any" class="form-control jumlah_faktur" onchange="countTotalFaktur(this)">
+                    <input type="text" step="any" class="form-control jumlah_faktur jumlah_faktur_${new_faktur}" onchange="countTotalFaktur(this)">
                 </td>
                 <td>
-                    <input type="number" step="any" class="form-control jumlah_retur" onchange="countTotalFaktur(this)">
+                    <input type="text" step="any" class="form-control jumlah_retur jumlah_retur_${new_faktur}" onchange="countTotalFaktur(this)">
                 </td>
                 <td class="total_faktur text-end">
 
@@ -142,6 +163,24 @@
 
         flatpickr(`.date_${new_faktur}`, {
             dateFormat: "d-m-Y",
+        });
+
+        new AutoNumeric(`.jumlah_faktur_${new_faktur}`, {
+            digitGroupSeparator: '.',     // pisah ribuan pakai titik
+            decimalCharacter: ',',        // desimal pakai koma
+            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+            currencySymbol: 'Rp ',
+            currencySymbolPlacement: 'p', // prefix "Rp "
+            unformatOnSubmit: true        // kirim nilai tanpa format
+        });
+
+        new AutoNumeric(`.jumlah_retur_${new_faktur}`, {
+            digitGroupSeparator: '.',     // pisah ribuan pakai titik
+            decimalCharacter: ',',        // desimal pakai koma
+            decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+            currencySymbol: 'Rp ',
+            currencySymbolPlacement: 'p', // prefix "Rp "
+            unformatOnSubmit: true        // kirim nilai tanpa format
         });
 
         new_faktur++
@@ -181,9 +220,26 @@
             let nomor_faktur = row.find('.nomor_faktur').val();
             let tgl_faktur = row.find('.tgl_faktur').val();
             let sales_order = row.find('.sales_order').val();
-            let jumlah_faktur = row.find('.jumlah_faktur').val();
-            let jumlah_retur = row.find('.jumlah_retur').val();
             let jumlah_diskon = row.find('.jumlah_diskon').val();
+
+            let check_faktur = row.find('.jumlah_faktur').val() || 0;
+            let check_retur = row.find('.jumlah_retur').val() || 0;
+
+            if (check_faktur != 0) {
+                var get_faktur = row.find('.jumlah_faktur')[0]
+                var get_faktur_element = AutoNumeric.getAutoNumericElement(get_faktur)
+                var jumlah_faktur = get_faktur_element.getNumber();
+            }else{
+                var jumlah_fakur = 0
+            }
+
+            if (check_retur != 0) {
+                var get_retur = row.find('.jumlah_retur')[0]
+                var get_retur_element = AutoNumeric.getAutoNumericElement(get_retur)
+                var jumlah_retur = get_retur_element.getNumber();
+            }else{
+                var jumlah_retur = 0
+            }
 
             arr_faktur.push({
                 nomor_faktur,
@@ -278,11 +334,26 @@
 
     function countTotalFaktur(ele) {
         var tr = $(ele).closest('tr')
-        let jumlah_faktur = parseFloat(tr.find('.jumlah_faktur').val()) || 0;
-        let jumlah_retur = parseFloat(tr.find('.jumlah_retur').val()) || 0;
-        let jumlah_diskon = parseFloat(tr.find('.jumlah_diskon').val()) || 0;
+        let check_faktur = tr.find('.jumlah_faktur').val() || 0;
+        let check_retur = tr.find('.jumlah_retur').val() || 0;
 
-        var total_faktur = jumlah_faktur - (jumlah_diskon/100*jumlah_faktur) - jumlah_retur
+        if (check_faktur != 0) {
+            var get_faktur = tr.find('.jumlah_faktur')[0]
+            var get_faktur_element = AutoNumeric.getAutoNumericElement(get_faktur)
+            var jumlah_faktur = get_faktur_element.getNumber();
+        }else{
+            var jumlah_fakur = 0
+        }
+
+        if (check_retur != 0) {
+            var get_retur = tr.find('.jumlah_retur')[0]
+            var get_retur_element = AutoNumeric.getAutoNumericElement(get_retur)
+            var jumlah_retur = get_retur_element.getNumber();
+        }else{
+            var jumlah_retur = 0
+        }
+
+        var total_faktur = jumlah_faktur - jumlah_retur
         var text_total_faktur = total_faktur.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         tr.find('.total_faktur').text(text_total_faktur.replace(/\./g, '#').replace(/,/g, '.').replace(/#/g, ','))
     }
