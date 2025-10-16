@@ -8,7 +8,7 @@
         </div>
         <div class="col-3">
             <label for="">Tanggal Contrabon</label>
-             <input type="text" name="" class="form-control tgl_contrabon date" id="" placeholder="yyyy-mm-dd">
+             <input type="text" name="" class="form-control tgl_contrabon date" id="" placeholder="dd-mm-yyyy">
         </div>
         <div class="col-2">
             <label for="">Tempo (hari)</label>
@@ -18,7 +18,7 @@
             <label for="">Tanggal Jatuh Tempo</label>
             <div class="row">
                 <div class="col-8">
-                    <input type="text" name="" class="form-control tgl_jatuh_tempo" id="" placeholder="yyyy-mm-dd" readonly>
+                    <input type="text" name="" class="form-control tgl_jatuh_tempo" id="" placeholder="dd-mm-yyyy" readonly>
                 </div>
                 <div class="col-4 d-flex align-items-center">
                     <span class="badge badge-dark pointer" onclick="countTanggalJatuhTempo(this)"><i class="icon-shift-right"></i> Hitung Tempo</span>
@@ -69,7 +69,7 @@
                             <input type="text" class="form-control nomor_faktur">
                         </td>
                         <td>
-                            <input type="date" class="form-control tgl_faktur">
+                            <input type="text" class="form-control tgl_faktur date" placeholder="dd-mm-yyyy">
                         </td>
                         <td>
                             <input type="text" class="form-control sales_order">
@@ -97,7 +97,11 @@
 </div>
 
 <script>
-    flatpickr(".date", {});
+    var new_faktur = 0;
+
+    flatpickr(".date", {
+        dateFormat: "d-m-Y",
+    });
     $('.option').selectize({
         theme: 'bootstrap5',
         maxItems: 1,
@@ -119,7 +123,7 @@
                     <input type="text" class="form-control nomor_faktur">
                 </td>
                 <td>
-                    <input type="date" class="form-control tgl_faktur">
+                    <input type="text" class="form-control tgl_faktur date_${new_faktur}" placeholder="dd-mm-yyyy">
                 </td>
                 <td>
                     <input type="text" class="form-control sales_order">
@@ -135,6 +139,12 @@
                 </td>
             </tr>
         `)
+
+        flatpickr(`.date_${new_faktur}`, {
+            dateFormat: "d-m-Y",
+        });
+
+        new_faktur++
     }
 
     function removeListFaktur(ele) {
@@ -246,23 +256,22 @@
         var tr = formData.find('.table_faktur tbody tr:first')
 
         let tempo = parseInt(formData.find('.tempo').val());
-        let date = tr.find('.tgl_faktur').val();
+        let check_date = tr.find('.tgl_faktur').val();
 
         // pastikan input tidak kosong
-        if (!date) {
+        if (!check_date) {
             alert('Pilih tanggal di baris pertama pada list faktur dulu!');
             return;
         }
 
-        // ubah ke objek Date
-        const startDate = new Date(date);
+        const [d, m, y] = check_date.split('-').map(Number); // pisahkan dd-mm-yyyy
+        const date = new Date(y, m - 1, d);
+        date.setDate(date.getDate() + tempo);
 
-        // tambahkan 70 hari
-        const futureDate = new Date(startDate);
-        futureDate.setDate(startDate.getDate() + tempo);
-
-        // format hasil ke YYYY-MM-DD
-        const formatted = futureDate.toISOString().split('T')[0];
+        const dd = String(date.getDate()).padStart(2, '0');
+        const mm = String(date.getMonth() + 1).padStart(2, '0');
+        const yyyy = date.getFullYear();
+        const formatted =  `${dd}-${mm}-${yyyy}`
 
         formData.find('.tgl_jatuh_tempo').val(formatted)
     }

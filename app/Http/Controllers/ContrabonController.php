@@ -64,8 +64,8 @@ class ContrabonController extends Controller
         try {
             $data = [
                 'nomor' => $request->nomor,
-                'tgl_contrabon' => $request->tgl_contrabon,
-                'tgl_jatuh_tempo' => $request->tgl_jatuh_tempo,
+                'tgl_contrabon' => Carbon::createFromFormat('d-m-Y', $request->tgl_contrabon)->format('Y-m-d'),
+                'tgl_jatuh_tempo' => Carbon::createFromFormat('d-m-Y', $request->tgl_jatuh_tempo)->format('Y-m-d'),
                 'tempo' => $request->tempo,
                 'id_customer' => $request->id_customer,
                 'id_sales' => $request->id_sales,
@@ -81,7 +81,7 @@ class ContrabonController extends Controller
                     $data2 = [
                         'id_contrabon' => $qry->id,
                         'nomor_faktur' => $value['nomor_faktur'],
-                        'tgl_faktur' => $value['tgl_faktur'],
+                        'tgl_faktur' =>  Carbon::createFromFormat('d-m-Y', $value['tgl_faktur'])->format('Y-m-d'),
                         'sales_order' => $value['sales_order'],
                         'jumlah_faktur' => $value['jumlah_faktur'],
                         'jumlah_retur' => $value['jumlah_retur'],
@@ -143,8 +143,8 @@ class ContrabonController extends Controller
             $data = [
                 'nomor' => $request->nomor,
                 'tempo' => $request->tempo,
-                'tgl_contrabon' => $request->tgl_contrabon,
-                'tgl_jatuh_tempo' => $request->tgl_jatuh_tempo,
+                'tgl_contrabon' => Carbon::createFromFormat('d-m-Y', $request->tgl_contrabon)->format('Y-m-d'),
+                'tgl_jatuh_tempo' => Carbon::createFromFormat('d-m-Y', $request->tgl_jatuh_tempo)->format('Y-m-d'),
                 'id_customer' => $request->id_customer,
                 'id_sales' => $request->id_sales,
                 'id_bank' => $request->id_bank,
@@ -157,7 +157,7 @@ class ContrabonController extends Controller
                 foreach ($request->arr_faktur as $key => $value) {
                     $data2 = [
                         'nomor_faktur' => $value['nomor_faktur'],
-                        'tgl_faktur' => $value['tgl_faktur'],
+                        'tgl_faktur' => Carbon::createFromFormat('d-m-Y', $value['tgl_faktur'])->format('Y-m-d'),
                         'sales_order' => $value['sales_order'],
                         'jumlah_faktur' => $value['jumlah_faktur'],
                         'jumlah_retur' => $value['jumlah_retur'],
@@ -173,7 +173,7 @@ class ContrabonController extends Controller
                     $data2 = [
                         'id_contrabon' => $request->id_contrabon,
                         'nomor_faktur' => $value['nomor_faktur'],
-                        'tgl_faktur' => $value['tgl_faktur'],
+                        'tgl_faktur' => Carbon::createFromFormat('d-m-Y', $value['tgl_faktur'])->format('Y-m-d'),
                         'sales_order' => $value['sales_order'],
                         'jumlah_faktur' => $value['jumlah_faktur'],
                         'jumlah_retur' => $value['jumlah_retur'],

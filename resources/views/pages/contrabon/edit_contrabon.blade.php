@@ -20,7 +20,7 @@
             <label for="">Tanggal Jatuh Tempo</label>
             <div class="row">
                 <div class="col-8">
-                    <input type="text" name="" class="form-control tgl_jatuh_tempo" id="" placeholder="yyyy-mm-dd" readonly value="{{$contrabon->tgl_jatuh_tempo}}">
+                    <input type="text" name="" class="form-control tgl_jatuh_tempo" id="" placeholder="dd-mm-yyyy" readonly value="{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->format('d-m-Y') }}">
                 </div>
                 <div class="col-4 d-flex align-items-center">
                     <span class="badge badge-dark pointer" onclick="countTanggalJatuhTempo(this)"><i class="icon-shift-right"></i> Hitung Tempo</span>
@@ -75,7 +75,7 @@
                                 <input type="text" class="form-control nomor_faktur" value="{{$value->nomor_faktur}}">
                             </td>
                             <td>
-                                <input type="date" class="form-control tgl_faktur" value="{{$value->tgl_faktur}}">
+                                <input type="text" class="form-control tgl_faktur date" value="{{$value->tgl_faktur}}">
                             </td>
                             <td>
                                 <input type="text" class="form-control sales_order" value="{{$value->sales_order}}">
@@ -105,7 +105,10 @@
 </div>
 
 <script>
-    flatpickr(".date", {});
+    var new_faktur = 0
+    flatpickr(".date", {
+        dateFormat: "d-m-Y",
+    });
     $('.option').selectize({
         theme: 'bootstrap5',
         maxItems: 1,
@@ -123,16 +126,13 @@
                     <input type="text" class="form-control nomor_faktur">
                 </td>
                 <td>
-                    <input type="date" class="form-control tgl_faktur">
+                    <input type="text" class="form-control tgl_faktur date_${new_faktur}" placeholder="dd-mm-yyyy">
                 </td>
                 <td>
                     <input type="text" class="form-control sales_order">
                 </td>
                 <td>
                     <input type="number" step="any" class="form-control jumlah_faktur" onchange="countTotalFaktur(this)">
-                </td>
-                <td>
-                    <input type="number" step="any" class="form-control jumlah_diskon" onchange="countTotalFaktur(this)">
                 </td>
                 <td>
                     <input type="number" step="any" class="form-control jumlah_retur" onchange="countTotalFaktur(this)">
@@ -142,6 +142,10 @@
                 </td>
             </tr>
         `)
+
+         flatpickr(`.date_${new_faktur}`, {
+            dateFormat: "d-m-Y",
+        });
     }
 
     function removeListFaktur(ele) {
