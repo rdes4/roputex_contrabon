@@ -111,8 +111,8 @@
             <td colspan="16">No. Rek : {{$contrabon->nomor_rekening}}</td>
         </tr>
         <tr>
-            <td colspan="10" rowspan="2"></td>
-            <td colspan="12" rowspan="2" style="font-size: 14px">{{strtoupper($contrabon->nama_customer)}}</td>
+            <td colspan="9" rowspan="2"></td>
+            <td colspan="13" rowspan="2" style="font-size: 14px">{{strtoupper($contrabon->nama_customer)}}</td>
             <td colspan="16">Nama : {{$contrabon->nama_pemilik}}</td>
         </tr>
         <tr>
@@ -168,7 +168,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.75in"></td>
+            <td colspan="43" height="" style="height: 0.7in"></td>
         </tr>
         <tr>
             <td colspan="12"></td>
