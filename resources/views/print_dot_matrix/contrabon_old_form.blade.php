@@ -168,7 +168,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.65in"></td>
+            <td colspan="43" height="" style="height: 0.6in"></td>
         </tr>
         <tr>
             <td colspan="11"></td>
