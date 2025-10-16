@@ -50,7 +50,7 @@
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
-            border: none
+            /* border: none */
 
         }
 
@@ -168,11 +168,11 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.67in"></td>
+            <td colspan="43" height="" style="height: 0.65in"></td>
         </tr>
         <tr>
-            <td colspan="12"></td>
-            <td colspan="10" style="padding-left: 0px">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
+            <td colspan="11"></td>
+            <td colspan="11" style="padding-left: 5px">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
             <td colspan="13" rowspan="2" style="padding-left: 10px">
                 <br>
                 <br>
