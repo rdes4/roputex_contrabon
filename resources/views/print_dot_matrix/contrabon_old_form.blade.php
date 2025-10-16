@@ -46,7 +46,7 @@
         }
 
         table.main td, table.main th {
-            /* border: 1px solid #000; */
+            border: 1px solid #000;
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
@@ -101,7 +101,7 @@
     <table class="main" style="width:100%">
 
         <tr>
-            <td colspan="43" height="" style="height: 0.7in"></td>
+            <td colspan="43" height="" style="height: 0.75in"></td>
         </tr>
         <tr>
             <td colspan="43" height="15px"></td>
@@ -124,7 +124,7 @@
         </tr>
         @php
             $no = 1;
-            $min_row = 17;
+            $min_row = 18;
             $total_faktur = 0;
         @endphp
         @foreach ($contrabon_faktur as $value)
@@ -168,7 +168,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.8in"></td>
+            <td colspan="43" height="" style="height: 0.75in"></td>
         </tr>
         <tr>
             <td colspan="12"></td>
