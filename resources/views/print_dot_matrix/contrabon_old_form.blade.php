@@ -120,7 +120,7 @@
         </tr>
         </tr>
         <tr>
-            <td colspan="43" height="" style="height: 0.4in"></td>
+            <td colspan="43" height="" style="height: 0.41in"></td>
         </tr>
         @php
             $no = 1;
@@ -164,16 +164,16 @@
 
         <tr>
             <td colspan="26" style="font-weight: bold; text-align:right"></td>
-            <td colspan="5" style="font-weight: bold; text-align:right; padding-top:10px">{{number_format($total_faktur)}}</td>
+            <td colspan="5" style="font-weight: bold; text-align:right; padding-top:9px">{{number_format($total_faktur)}}</td>
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.7in"></td>
+            <td colspan="43" height="" style="height: 0.67in"></td>
         </tr>
         <tr>
             <td colspan="12"></td>
-            <td colspan="10">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
-            <td colspan="13" rowspan="2">
+            <td colspan="10" style="padding-left: 0px">{{ \Carbon\Carbon::parse($contrabon->tgl_jatuh_tempo)->translatedFormat('d F Y') }}</td>
+            <td colspan="13" rowspan="2" style="padding-left: 10px">
                 <br>
                 <br>
                 {{ \Carbon\Carbon::parse($contrabon->tgl_contrabon)->translatedFormat('d F Y') }}
