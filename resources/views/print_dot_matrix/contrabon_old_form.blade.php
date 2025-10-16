@@ -50,7 +50,7 @@
             padding: 1px 5px;
             vertical-align: middle;
             white-space: nowrap;
-            /* border: none */
+            border: none
 
         }
 
