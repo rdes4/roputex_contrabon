@@ -101,7 +101,7 @@
     <table class="main" style="width:100%">
 
         <tr>
-            <td colspan="43" height="" style="height: 1in"></td>
+            <td colspan="43" height="" style="height: 0.7in"></td>
         </tr>
         <tr>
             <td colspan="43" height="15px"></td>
@@ -134,7 +134,7 @@
         @endphp
         <tr>
             <td colspan="1"  height="15px"></td>
-            <td colspan="5" style="padding-left: 6px;">{{$value->nomor_faktur}}</td>
+            <td colspan="5" style="padding-left: 4px;">{{$value->nomor_faktur}}</td>
             <td colspan="5">{{ \Carbon\Carbon::parse($value->tgl_faktur)->format('d-m-Y') }}</td>
             <td colspan="4">{{$value->sales_order}}</td>
             <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur)}}</td>
