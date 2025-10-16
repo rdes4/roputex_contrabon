@@ -32,7 +32,7 @@
             padding: 0.25in;
             box-sizing: border-box;
             font-family: "Courier New", monospace;
-            font-size: 12px;
+            font-size: 13px;
             color: #000;
             overflow: hidden;
         }
@@ -101,7 +101,7 @@
     <table class="main" style="width:100%">
 
         <tr>
-            <td colspan="43" height="" style="height: 1.55in"></td>
+            <td colspan="43" height="" style="height: 1.4in"></td>
         </tr>
         <tr>
             <td colspan="43" height="15px"></td>
@@ -111,8 +111,8 @@
             <td colspan="16">No. Rek : {{$contrabon->nomor_rekening}}</td>
         </tr>
         <tr>
-            <td colspan="12" rowspan="2"></td>
-            <td colspan="10" rowspan="2" style="font-size: 14px">{{strtoupper($contrabon->nama_customer)}}</td>
+            <td colspan="10" rowspan="2"></td>
+            <td colspan="12" rowspan="2" style="font-size: 14px">{{strtoupper($contrabon->nama_customer)}}</td>
             <td colspan="16">Nama : {{$contrabon->nama_pemilik}}</td>
         </tr>
         <tr>
@@ -124,7 +124,7 @@
         </tr>
         @php
             $no = 1;
-            $min_row = 16;
+            $min_row = 17;
             $total_faktur = 0;
         @endphp
         @foreach ($contrabon_faktur as $value)
@@ -133,12 +133,12 @@
             $retur_or_disc = $value->jumlah_diskon != NULL ? $value->jumlah_diskon : $value->jumlah_retur;
         @endphp
         <tr>
-            <td colspan="4"  height="15px"></td>
+            <td colspan="2"  height="15px"></td>
             <td colspan="5" style="padding-left: 9px;">{{$value->nomor_faktur}}</td>
             <td colspan="5">{{ \Carbon\Carbon::parse($value->tgl_faktur)->format('d-m-Y') }}</td>
             <td colspan="3">{{$value->sales_order}}</td>
             <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur)}}</td>
-            <td colspan="5" style="text-align: right; padding-right: 9px">{{number_format($retur_or_disc)}}</td>
+            <td colspan="6" style="text-align: right; padding-right: 9px">{{number_format($retur_or_disc)}}</td>
             <td colspan="5" style="text-align: right; padding-right: 8px">{{number_format($value->jumlah_faktur-$pengurang)}}</td>
         </tr>
         @php
@@ -168,7 +168,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="" style="height: 0.5in"></td>
+            <td colspan="43" height="" style="height: 2.5in"></td>
         </tr>
         <tr>
             <td colspan="13"></td>
