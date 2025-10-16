@@ -26,7 +26,7 @@
         .paper {
             background: white;
             width: 9.5in;
-            height: 5.5in;
+            height: 11in;
             box-shadow: 0 0 10px rgba(0,0,0,0.3);
             padding: 0.25in;
             box-sizing: border-box;
