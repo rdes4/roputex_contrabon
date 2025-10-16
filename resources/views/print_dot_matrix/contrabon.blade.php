@@ -15,7 +15,7 @@
 
         html, body {
             /* height: 100%; */
-            margin: 0;
+            /* margin: 0; */
             background: #ccc;
             display: flex;
             justify-content: center;
@@ -73,7 +73,7 @@
             .paper {
                 box-shadow: none;
                 width: 9.5in;
-                height: 5.5in;
+                height: 11in;
                 page-break-inside: avoid;
             }
 
