@@ -135,12 +135,12 @@
 
         <tr>
             <td colspan="2">No.</td>
-            <td colspan="7">Nomor Faktur</td>
-            <td colspan="7">Tanggal Faktur</td>
-            <td colspan="5">SO</td>
-            <td colspan="7">Jumlah</td>
-            <td colspan="7">Retur/Diskon</td>
-            <td colspan="8">Total</td>
+            <td colspan="7" style="text-align: center">Nomor Faktur</td>
+            <td colspan="7" style="text-align: center">Tanggal Faktur</td>
+            <td colspan="5" style="text-align: center">SO</td>
+            <td colspan="7" style="text-align: center">Jumlah</td>
+            <td colspan="7" style="text-align: center">Retur/Diskon</td>
+            <td colspan="8" style="text-align: center">Total</td>
         </tr>
 
         @php
