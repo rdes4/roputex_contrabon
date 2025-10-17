@@ -34,6 +34,7 @@
             font-size: 10pt;
             color: #000;
             overflow: hidden;
+            padding-right: 50px;
         }
 
         /* ===== TABEL UTAMA ===== */
@@ -125,7 +126,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="15px" style="border: none"></td>
+            <td colspan="43" height="5px" style="border: none"></td>
         </tr>
         <tr>
             <td colspan="43" height="20px" style="border-bottom: none; text-align: center; font-weight: bold">TANDA TERIMA</td>
@@ -188,7 +189,7 @@
         </tr>
 
         <tr>
-            <td colspan="43" height="10px" style="border: none"></td>
+            <td colspan="43" height="5px" style="border: none"></td>
         </tr>
 
         <tr>
