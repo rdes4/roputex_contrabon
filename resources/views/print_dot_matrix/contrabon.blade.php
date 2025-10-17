@@ -244,13 +244,13 @@
         </tr>
         <tr>
             <td colspan="10" height="12px" style="text-align: center; border-top: none; border-right: none; border-left: none">
-                (________________________)
+                (_____________________)
                 <br>
                 Bagian Penagih
             </td>
             <td colspan="4" style="border-top: none; border-right: none; border-left: none;"></td>
             <td colspan="10" style="text-align: center; border-top: none; border-left: none;">
-                (________________________)
+                (_____________________)
                 <br>
                 Pelanggan
             </td>
