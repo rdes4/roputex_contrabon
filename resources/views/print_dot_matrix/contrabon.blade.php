@@ -35,7 +35,7 @@
             color: #000;
             overflow: hidden;
             padding-right: 50px;
-            padding-top: 15px;
+            padding-top: 18px;
         }
 
         /* ===== TABEL UTAMA ===== */
