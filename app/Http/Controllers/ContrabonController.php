@@ -40,7 +40,7 @@ class ContrabonController extends Controller
                     'id' => $post->id,
                     'nomor' => $post->nomor,
                     'tempo' => $post->tempo,
-                    'tgl_jatuh_tempo' => $post->tgl_jatuh_tempo,
+                    'tgl_jatuh_tempo' => Carbon::parse($post->tgl_jatuh_tempo)->format('d-m-Y'),
                     'id_customer' => CustomerModel::where('id', $post->id_customer)->first()->nama,
                     'id_sales' => SalesModel::where('id', $post->id_sales)->first()->nama,
                     'id_bank' => $bank->bank.' - '.$bank->nomor_rekening,
