@@ -45,6 +45,7 @@ class ContrabonController extends Controller
                     'id_sales' => SalesModel::where('id', $post->id_sales)->first()->nama,
                     'id_bank' => $bank->bank.' - '.$bank->nomor_rekening,
                     'total_faktur' => ContrabonFakturModel::where('id_contrabon', $post->id)->count(),
+                    'total_tagihan' => number_format(ContrabonFakturModel::selectRaw("(jumlah_faktur-COALESCE(jumlah_retur, 0)) as total_tagihan")->where('id_contrabon', $post->id)->get()->sum('total_tagihan'), 2),
                 ];
             }
         }

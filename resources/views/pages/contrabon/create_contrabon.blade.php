@@ -92,8 +92,11 @@
     </div>
 
     <div class="row mt-3">
-        <div class="col-12">
+        <div class="col-6">
             <button class="btn btn-sm btn-light btn-square px-2 btn-icon border" onclick="saveContrabon(this)"><i class="icon-save"></i> Simpan</button>
+        </div>
+        <div class="col-6">
+            <h5>Total Tagihan : <span class="total_tagihan">0</span></h5>
         </div>
     </div>
 </div>
@@ -390,5 +393,34 @@
         var total_faktur = jumlah_faktur - jumlah_retur
         var text_total_faktur = total_faktur.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         tr.find('.total_faktur').text(text_total_faktur.replace(/\./g, '#').replace(/,/g, '.').replace(/#/g, ','))
+
+        countTotaltagihan(ele)
+    }
+
+    function countTotaltagihan(ele) {
+        var formData = $(ele).closest('.form_data')
+        let total_faktur = 0;
+        formData.find('.jumlah_faktur').each(function() {
+            var get_faktur = $(this)[0]
+            var get_faktur_element = AutoNumeric.getAutoNumericElement(get_faktur)
+            var jumlah_faktur = get_faktur_element.getNumber();
+
+            let val = parseFloat(jumlah_faktur) || 0;
+            total_faktur += val;
+        });
+
+        let total_retur = 0;
+        formData.find('.jumlah_retur').each(function() {
+            var get_retur = $(this)[0]
+            var get_retur_element = AutoNumeric.getAutoNumericElement(get_retur)
+            var jumlah_retur = get_retur_element.getNumber();
+
+            let val = parseFloat(jumlah_retur) || 0;
+            total_retur += val;
+        });
+
+        var total_tagihan = total_faktur - total_retur
+        var total_tagihan_text = total_tagihan.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
+        formData.find('.total_tagihan').html(total_tagihan_text)
     }
 </script>

@@ -12,6 +12,7 @@
                     <th>Bank</th>
                     <th>Tanggal Jatuh Tempo</th>
                     <th>Faktur</th>
+                    <th>Total Tagihan</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
@@ -27,7 +28,7 @@ $(document).ready(function (params) {
     var table = $('.datatable_contrabond').DataTable({
         columnDefs: [
             { width: "8%", targets: [6] },
-            { width: "10%", targets: [7] },
+            { width: "10%", targets: [8] },
             {
                 "targets": [0],
                 "visible": false,
@@ -100,6 +101,12 @@ $(document).ready(function (params) {
                 "data": "total_faktur",
                 render: function (data, type, row) {
                     return data + " Faktur";
+                }
+            },
+            {
+                "data": "total_tagihan",
+                render: function (data, type, row) {
+                    return `<p class="m-0 text-end">${data}</p>`;
                 }
             },
             {
