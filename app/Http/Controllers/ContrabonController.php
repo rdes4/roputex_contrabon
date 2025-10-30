@@ -168,8 +168,8 @@ class ContrabonController extends Controller
                 }
             }
 
-            if (isset($request->arr_new_faktur)) {
-                foreach ($request->arr_new_faktur as $key => $value) {
+            if (isset($request->arr_new_faktur_edit)) {
+                foreach ($request->arr_new_faktur_edit as $key => $value) {
                     $data2 = [
                         'id_contrabon' => $request->id_contrabon,
                         'nomor_faktur' => $value['nomor_faktur'],
