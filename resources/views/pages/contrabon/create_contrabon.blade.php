@@ -97,6 +97,12 @@
         </div>
     </div>
 
+    <div class="row mt-3">
+        <div class="col-6">
+            <button class="btn btn-sm btn-light btn-square px-2 btn-icon border" onclick="saveContrabon(this)"><i class="icon-save"></i> Simpan</button>
+        </div>
+    </div>
+
 </div>
 
 <script>
