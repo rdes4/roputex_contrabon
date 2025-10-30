@@ -96,11 +96,17 @@
                             </td>
                         </tr>
                         @php
-                            $total_tagihan += $value->jumlah_faktur+$value->jumlah_retur;
+                            $total_tagihan += $value->jumlah_faktur-$value->jumlah_retur;
                         @endphp
                     @endforeach
 
                 </tbody>
+                <tfoot>
+                    <td colspan="7" class="text-end"> Total Tagihan</td>
+                    <td class="text-end">
+                        <span class="total_tagihan_edit ">{{number_format($total_tagihan, 2 )}}</span>
+                    </td>
+                </tfoot>
             </table>
         </div>
     </div>
@@ -110,7 +116,7 @@
             <button class="btn btn-sm btn-light btn-square px-2 btn-icon border" onclick="updateContrabon(this)"><i class="icon-save"></i> Simpan</button>
         </div>
         <div class="col-6">
-            <h5>Total Tagihan : <span class="total_tagihan_edit">{{number_format($total_tagihan, 2 )}}</span></h5>
+
         </div>
     </div>
 </div>
@@ -215,6 +221,8 @@
             });
 
             updateNumberingEdit();
+
+            new_faktur_edit++
         }else{
             Swal.fire({
                 icon: 'warning',
@@ -230,7 +238,9 @@
     }
 
     function removeListFakturEdit(ele) {
+        var table = $(ele).closest('.form_data').find('table')
         $(ele).closest('tr').remove()
+        countTotaltagihanEdit(table)
         updateNumberingEdit();
     }
 
@@ -426,6 +436,7 @@
                 },
                 function(data, status){
                     toast.show()
+                    countTotaltagihanEdit(ele)
                     $(ele).closest('tr').remove()
                     updateNumberingEdit();
                 })
@@ -435,6 +446,8 @@
 
     function countTotaltagihanEdit(ele) {
         var formData = $(ele).closest('.form_data')
+        console.log(formData);
+
         let total_faktur = 0;
         formData.find('.jumlah_faktur').each(function() {
             var get_faktur = $(this)[0]

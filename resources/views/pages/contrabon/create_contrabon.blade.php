@@ -87,18 +87,16 @@
                         </td>
                     </tr>
                 </tbody>
+                <tfoot>
+                    <tr>
+                        <td colspan="7" class="text-end">Total Tagihan</td>
+                        <td colspan="" class="text-end"><span class="total_tagihan">0</span></td>
+                    </tr>
+                </tfoot>
             </table>
         </div>
     </div>
 
-    <div class="row mt-3">
-        <div class="col-6">
-            <button class="btn btn-sm btn-light btn-square px-2 btn-icon border" onclick="saveContrabon(this)"><i class="icon-save"></i> Simpan</button>
-        </div>
-        <div class="col-6">
-            <h5>Total Tagihan : <span class="total_tagihan">0</span></h5>
-        </div>
-    </div>
 </div>
 
 <script>
@@ -223,7 +221,9 @@
     }
 
     function removeListFaktur(ele) {
+        var table = $(ele).closest('.form_data').find('table')
         $(ele).closest('tr').remove()
+        countTotaltagihan(table)
         updateNumbering();
     }
 
