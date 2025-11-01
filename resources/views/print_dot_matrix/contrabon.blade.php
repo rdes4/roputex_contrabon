@@ -145,13 +145,13 @@
 
         @php
             $no = 1;
-            $min_row = 10;
+            $min_row = 17;
             $total_faktur = 0;
         @endphp
         @foreach ($contrabon_faktur as $value)
         @php
             $pengurang = $value->jumlah_diskon != NULL ? $value->jumlah_diskon/100*$value->jumlah_faktur : $value->jumlah_retur;
-            $retur_or_disc = $value->jumlah_diskon != NULL ? $value->jumlah_diskon : $value->jumlah_retur;
+            $retur_or_disc = $value->jumlah_retur != NULL && $value->jumlah_retur > 0 ? number_format($value->jumlah_retur, 0, ',', '.') : '';
         @endphp
         <tr>
             <td colspan="2">{{$no}}</td>
@@ -159,7 +159,7 @@
             <td colspan="7">{{ \Carbon\Carbon::parse($value->tgl_faktur)->format('d-m-Y') }}</td>
             <td colspan="5">{{$value->sales_order}}</td>
             <td colspan="7" style="text-align: right">{{number_format($value->jumlah_faktur, 2)}}</td>
-            <td colspan="7" style="text-align: right">{{number_format($retur_or_disc, 2)}}</td>
+            <td colspan="7" style="text-align: right">{{$retur_or_disc}}</td>
             <td colspan="8" style="text-align: right">{{number_format($value->jumlah_faktur-$pengurang, 2)}}</td>
         </tr>
         @php
