@@ -118,7 +118,7 @@
     new AutoNumeric(`.jumlah_faktur`, {
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
-        decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+        decimalPlaces: 0,             // tampilkan 2 angka di belakang koma
         currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
@@ -126,7 +126,7 @@
     new AutoNumeric(`.jumlah_retur`, {
         digitGroupSeparator: '.',     // pisah ribuan pakai titik
         decimalCharacter: ',',        // desimal pakai koma
-        decimalPlaces: 2,             // tampilkan 2 angka di belakang koma
+        decimalPlaces: 0,             // tampilkan 2 angka di belakang koma
         currencySymbol: 'Rp. ',
         currencySymbolPlacement: 'p', // prefix "Rp "
         unformatOnSubmit: true        // kirim nilai tanpa format
