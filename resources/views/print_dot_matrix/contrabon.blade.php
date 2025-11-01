@@ -186,7 +186,7 @@
 
         <tr>
             <td colspan="35" style="font-weight: bold; text-align:right">TOTAL</td>
-            <td colspan="8" style="font-weight: bold; text-align:right">{{number_format($total_faktur, 2)}}</td>
+            <td colspan="8" style="font-weight: bold; text-align:right">{{number_format($total_faktur, 0)}}</td>
         </tr>
 
         <tr>
