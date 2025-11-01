@@ -10,7 +10,7 @@
         </div>
         <div class="col-3">
             <label for="">Tanggal Contrabon</label>
-             <input type="text" name="" class="form-control tgl_contrabon date" id="" placeholder="yyyy-mm-dd" value="{{$contrabon->tgl_contrabon}}">
+             <input type="text" name="" class="form-control tgl_contrabon date" id="" placeholder="dd-mm-yyyy" value="{{$contrabon->tgl_contrabon}}">
         </div>
         <div class="col-2">
             <label for="">Tempo (hari)</label>
@@ -80,7 +80,7 @@
                                 <input type="text" class="form-control nomor_faktur" value="{{$value->nomor_faktur}}">
                             </td>
                             <td>
-                                <input type="text" class="form-control tgl_faktur date" value="{{$value->tgl_faktur}}">
+                                <input type="text" class="form-control tgl_faktur date date_{{$value->id}}" value="{{$value->tgl_faktur}}">
                             </td>
                             <td>
                                 <input type="text" class="form-control sales_order" value="{{$value->sales_order}}">
@@ -142,10 +142,26 @@
         unformatOnSubmit: true        // kirim nilai tanpa format
     });
 
+    flatpickr(`.date`, {
+            dateFormat: "Y-m-d",   // format nilai sebenarnya (untuk form)
+            altInput: true,        // aktifkan input tampilan terpisah
+            altFormat: "d-m-Y",    // tampilkan format DD-MM-YYYY ke user
+             allowInput: true,
+        });
+
     var new_faktur_edit = 0
-    flatpickr(".date", {
-        dateFormat: "d-m-Y",
-    });
+
+    $('.table_faktur_edit tbody tr').each(function(index){
+        var id_contrabon_faktur = $(this).find('.id_contrabon_faktur').val()
+        console.log(id_contrabon_faktur);
+
+        flatpickr(`.date_${id_contrabon_faktur}`, {
+            dateFormat: "Y-m-d",   // format nilai sebenarnya (untuk form)
+            altInput: true,        // aktifkan input tampilan terpisah
+            altFormat: "d-m-Y",    // tampilkan format DD-MM-YYYY ke user
+             allowInput: true,
+        });
+    })
 
     $('.option').selectize({
         theme: 'bootstrap5',
@@ -321,7 +337,7 @@
             if (check_faktur != 0) {
                 var get_faktur = row.find('.jumlah_faktur')[0]
                 var get_faktur_element = AutoNumeric.getAutoNumericElement(get_faktur)
-                var jumlah_faktur = get_faktur_element.getNumber();
+                var jumlah_faktur = parseFloat(get_faktur_element.getNumber());
             }else{
                 var jumlah_fakur = 0
             }
@@ -329,7 +345,7 @@
             if (check_retur != 0) {
                 var get_retur = row.find('.jumlah_retur')[0]
                 var get_retur_element = AutoNumeric.getAutoNumericElement(get_retur)
-                var jumlah_retur = get_retur_element.getNumber();
+                var jumlah_retur = parseFloat(get_retur_element.getNumber());
             }else{
                 var jumlah_retur = 0
             }
@@ -360,7 +376,7 @@
         function(data, status){
             if (data.success) {
                 toast.show()
-
+                loadEditContrabon(ele)
             }
         })
     }
@@ -381,14 +397,18 @@
         // ubah ke objek Date
         const startDate = new Date(date);
 
-        // tambahkan 70 hari
+        // tambahkan 70 hPari
         const futureDate = new Date(startDate);
         futureDate.setDate(startDate.getDate() + tempo);
 
         // format hasil ke YYYY-MM-DD
-        const formatted = futureDate.toISOString().split('T')[0];
+        let day2 = String(futureDate.getDate()).padStart(2, '0');
+        let month2 = String(futureDate.getMonth() + 1).padStart(2, '0');
+        let year2 = futureDate.getFullYear();
 
-        formData.find('.tgl_jatuh_tempo').val(formatted)
+        let formatted = `${day2}-${month2}-${year2}`;
+
+        formData.find('.tgl_jatuh_tempo').val(formatted);
     }
 
     function countTotalFakturEdit(ele) {
@@ -471,6 +491,28 @@
         var total_tagihan = total_faktur - total_retur
         var total_tagihan_text = total_tagihan.toLocaleString('id-ID', { minimumFractionDigits: 2, maximumFractionDigits: 2 })
         formData.find('.total_tagihan_edit').html(total_tagihan_text)
+    }
+
+    function loadEditContrabon(ele) {
+        var formData = $(ele).closest('.form_data')
+        var id_contrabon = formData.find('.id_contrabon').val()
+        var modal_body = $(ele).closest('.modal_xl_body')
+        modal_body.html(`
+            <div class="my-3 d-flex justify-content-center">
+                <div class="spinner"></div>
+            </div>
+        `)
+
+        $.post(main_url + "/contrabon/edit",
+        {
+            _token: token,
+            id_contrabon,
+        },
+        function(data, status){
+            // if (data.success) {
+                modal_body.html(data)
+            // }
+        })
     }
 
 </script>
